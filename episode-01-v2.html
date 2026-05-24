@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVO · Episode 01 · v2 Refined · 2026.05.24</title>
+<style>
+:root {
+  --brand-accent: #1c7e3f;
+  --brand-accent-soft: #5a9874;
+  --brand-accent-deep: #233b1c;
+  --ink: #010301;
+  --ink-soft: #4A4A4A;
+  --ink-muted: #8A8A85;
+  --paper: #F7FEF9;
+  --paper-warm: #F2EBDB;
+  --paper-card: #FFFFFF;
+  --line: #E8E3D5;
+  --line-soft: #F0EBDD;
+  --accent-warn: #B8745A;
+  --score-good: #1c7e3f;
+  --score-mid: #C19A3C;
+  --score-bad: #B8745A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Pretendard", "Noto Sans KR", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(247, 254, 249, 0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-accent); }
+.nav-meta { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.3px; }
+
+.wrap { max-width: 900px; margin: 0 auto; padding: 56px 32px 120px; }
+
+.hero { margin-bottom: 56px; }
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.6px;
+  color: var(--ink);
+  margin-bottom: 20px;
+  word-break: keep-all;
+}
+.hero-sub {
+  font-size: 22px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  letter-spacing: -0.3px;
+  max-width: 660px;
+}
+.hero-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.hero-meta { font-size: 12px; color: var(--ink-muted); }
+.hero-meta strong {
+  color: var(--ink);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+/* SCORE BANNER */
+.score-banner {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.score-banner-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  margin-bottom: 14px;
+}
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin: 14px 0 6px;
+}
+.score-cell {
+  text-align: center;
+  padding: 14px 8px;
+  border-radius: 10px;
+  background: var(--paper-warm);
+}
+.score-cell.good { background: rgba(28, 126, 63, 0.10); }
+.score-cell.mid  { background: rgba(193, 154, 60, 0.12); }
+.score-cell.bad  { background: rgba(184, 116, 90, 0.10); }
+.score-num {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.score-num.good { color: var(--score-good); }
+.score-num.mid  { color: var(--score-mid); }
+.score-num.bad  { color: var(--score-bad); }
+.score-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.score-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  margin-top: 12px;
+}
+.score-total { font-size: 13px; color: var(--ink-soft); }
+.score-total strong { color: var(--ink); font-size: 18px; font-weight: 700; }
+.score-delta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-accent);
+  background: rgba(28, 126, 63, 0.10);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+section { margin-bottom: 64px; }
+.section-head { margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.section-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--brand-accent); text-transform: uppercase; margin-bottom: 6px; }
+.section-title { font-size: 34px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.15; font-family: Georgia, serif; }
+.section-lede { font-size: 17px; color: var(--ink-soft); margin-top: 10px; line-height: 1.5; max-width: 640px; }
+
+.callout {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--brand-accent);
+  padding: 22px 26px;
+  border-radius: 0 14px 14px 0;
+  margin: 22px 0;
+}
+.callout-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brand-accent); margin-bottom: 8px; }
+.callout p { font-size: 15px; color: var(--ink); line-height: 1.6; }
+.callout p + p { margin-top: 8px; }
+
+.quote {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 28px 0;
+  font-style: italic;
+}
+.quote-attr {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 14px;
+  font-style: normal;
+}
+
+.mini-card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 14px 0;
+}
+.mini-card-title { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-accent); margin-bottom: 10px; }
+.mini-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+.mini-card p + p { margin-top: 8px; }
+.mini-card p strong { color: var(--ink); font-weight: 700; }
+
+/* BEATS */
+.beat-grid { display: grid; gap: 16px; }
+.beat {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+.beat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.beat-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+}
+.beat-time {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.beat-title { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 16px; }
+.beat-script {
+  background: var(--paper-warm);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+.beat-script-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brand-accent); margin-bottom: 8px; }
+.beat-script-kr {
+  font-family: Georgia, "Noto Sans KR", serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  word-break: keep-all;
+}
+.beat-script-en {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  font-style: italic;
+  line-height: 1.45;
+}
+.beat-shot {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding: 8px 0;
+  border-top: 1px solid var(--line-soft);
+}
+.beat-shot strong {
+  color: var(--brand-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-right: 8px;
+  background: var(--paper-warm);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.beat-principle {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  background: rgba(28, 126, 63, 0.10);
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin: 4px 4px 0 0;
+}
+
+table { width: 100%; border-collapse: collapse; margin: 18px 0; background: var(--paper-card); border-radius: 12px; overflow: hidden; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px; }
+th { background: var(--paper-warm); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-accent); }
+tr:last-child td { border-bottom: none; }
+
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.do-dont > div { background: var(--paper-card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+.do-dont .do { border-left: 3px solid var(--brand-accent); border-radius: 0 14px 14px 0; }
+.do-dont .dont { border-left: 3px solid var(--accent-warn); border-radius: 0 14px 14px 0; }
+.do-dont h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+.do-dont .do h4 { color: var(--brand-accent); }
+.do-dont .dont h4 { color: var(--accent-warn); }
+.do-dont li { list-style: none; font-size: 13.5px; padding: 6px 0; line-height: 1.55; color: var(--ink); }
+.do-dont li::before { content: "—"; color: var(--ink-muted); margin-right: 8px; }
+
+.chip {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--paper-warm);
+  color: var(--brand-accent);
+  margin: 3px 4px 3px 0;
+  border: 1px solid var(--line);
+}
+.hashtag-row .chip { background: var(--paper-card); color: var(--ink); font-weight: 500; }
+
+.caption-block {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+.caption-block-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--brand-accent); text-transform: uppercase; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line-soft); }
+
+.diff-block {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 14px 0;
+  overflow: hidden;
+}
+.diff-row { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line-soft); }
+.diff-row:last-child { border-bottom: none; }
+.diff-row.v1 { background: rgba(184, 116, 90, 0.06); }
+.diff-row.v2 { background: rgba(28, 126, 63, 0.06); }
+.diff-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding-top: 2px; }
+.diff-row.v1 .diff-label { color: var(--accent-warn); }
+.diff-row.v2 .diff-label { color: var(--brand-accent); }
+.diff-body { font-size: 14px; color: var(--ink); line-height: 1.55; word-break: keep-all; }
+.diff-body strong { color: var(--ink); font-weight: 700; }
+
+.next-ep {
+  background: linear-gradient(135deg, var(--brand-accent) 0%, var(--brand-accent-deep) 100%);
+  color: white;
+  border-radius: 18px;
+  padding: 40px 44px;
+  margin-top: 48px;
+}
+.next-ep-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 12px; }
+.next-ep-title { font-family: Georgia, serif; font-size: 32px; font-weight: 700; line-height: 1.25; letter-spacing: -0.6px; margin-bottom: 10px; }
+.next-ep-sub { font-size: 15px; opacity: 0.85; line-height: 1.5; }
+
+.footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.3px; }
+
+@media (max-width: 720px) {
+  .hero-title { font-size: 42px; }
+  .section-title { font-size: 26px; }
+  .do-dont, .hero-meta-row { grid-template-columns: 1fr 1fr; }
+  .score-grid { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">AVO · Brand Page · Episode 01 · v2</div>
+  <div class="nav-meta">2026.05.24 · refined per 6 psychology principles</div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">Episode 01 · v2 · Refined</div>
+    <h1 class="hero-title">저도 못 먹어요.</h1>
+    <p class="hero-sub">Founder confession in, category position out. 60-second Reel script rebuilt from psychology principles. Curiosity gap hook, founder-as-protagonist throughline, Daoom heritage as 1-second backstop.</p>
+
+    <div class="hero-meta-row">
+      <div class="hero-meta"><strong>Duration</strong> 55–60 seconds</div>
+      <div class="hero-meta"><strong>Format</strong> 9:16 vertical · Reel · single shoot day</div>
+      <div class="hero-meta"><strong>Language</strong> Korean primary · English captions</div>
+      <div class="hero-meta"><strong>Talent</strong> Alex (on-camera + VO)</div>
+      <div class="hero-meta"><strong>Product</strong> Wild Greens Salad Soymilk · 190mL</div>
+      <div class="hero-meta"><strong>Series role</strong> Brand introduction · anchor</div>
+    </div>
+  </header>
+
+  <!-- PSYCHOLOGY SCORE BANNER -->
+  <div class="score-banner">
+    <div class="score-banner-head">6-Principle Psychology Score · v2 vs v1</div>
+    <div class="score-grid">
+      <div class="score-cell good">
+        <div class="score-num good">7</div>
+        <div class="score-label">Format Steal</div>
+      </div>
+      <div class="score-cell good">
+        <div class="score-num good">9</div>
+        <div class="score-label">Curiosity</div>
+      </div>
+      <div class="score-cell good">
+        <div class="score-num good">8</div>
+        <div class="score-label">Identity</div>
+      </div>
+      <div class="score-cell good">
+        <div class="score-num good">8</div>
+        <div class="score-label">Authority</div>
+      </div>
+      <div class="score-cell good">
+        <div class="score-num good">8</div>
+        <div class="score-label">Shareable</div>
+      </div>
+      <div class="score-cell good">
+        <div class="score-num good">9</div>
+        <div class="score-label">Stories</div>
+      </div>
+    </div>
+    <div class="score-total-row">
+      <div class="score-total">v2 projected total · <strong>49/60</strong> (82%) · v1 was 22/60 (37%)</div>
+      <div class="score-delta">+27 points</div>
+    </div>
+  </div>
+
+  <!-- WHY THIS STORY (REVISED) -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">01 · The Pivot</div>
+      <h2 class="section-title">Why v1 missed · why v2 leads with confession</h2>
+      <p class="section-lede">v1 led with the brand's category position ("anti-magic-pill"). That's a position, not a hook. People buy identities, not positions — and they buy from founders who admit they're human, not from brands who declare their thesis.</p>
+    </div>
+
+    <div class="diff-block">
+      <div class="diff-row v1"><div class="diff-label">v1 Hook</div><div class="diff-body">"다들 마법의 알약을 찾아요. 그런 건 없어요." — declarative, answers the question before opening it. Brain auto-categorizes as ad.</div></div>
+      <div class="diff-row v2"><div class="diff-label">v2 Hook</div><div class="diff-body"><strong>"솔직히 말하면, 저도 매일 채소 350g 못 먹어요."</strong> — founder confession with Naver-verified stat. Curiosity gap: <em>wait, the founder can't either?</em> Locks in the next 5 seconds.</div></div>
+    </div>
+
+    <div class="diff-block">
+      <div class="diff-row v1"><div class="diff-label">v1 Story</div><div class="diff-body">No protagonist. Abstract category positioning throughout ("Everyone's stacking, we're cleaner"). Reader stays in analytical mode.</div></div>
+      <div class="diff-row v2"><div class="diff-label">v2 Story</div><div class="diff-body"><strong>Alex is protagonist all 60 seconds.</strong> His confession, his counter, his morning, his ritual. Real motions. Documentary register. Stories beat abstractions 9-to-1.</div></div>
+    </div>
+
+    <div class="diff-block">
+      <div class="diff-row v1"><div class="diff-label">v1 Identity</div><div class="diff-body">Beat 3 dumps specs: "18종 / 5,000mg / 단백질 5g / 4종 무첨가" — pure Layer 1 (product attributes). Viewer never sees themselves.</div></div>
+      <div class="diff-row v2"><div class="diff-label">v2 Identity</div><div class="diff-body">Identity Layer 3 stamped in Beat 3: <strong>"매일 하나만 바꾸는 사람."</strong> Viewer recognizes themselves before specs ever appear. Specs demoted to Beat 4 footnote.</div></div>
+    </div>
+
+    <div class="diff-block">
+      <div class="diff-row v1"><div class="diff-label">v1 Authority</div><div class="diff-body">Daoom heritage saved for Ep 02 tease. Ep 01 itself has zero credential anchor on first watch.</div></div>
+      <div class="diff-row v2"><div class="diff-label">v2 Authority</div><div class="diff-body"><strong>One-second flash</strong> of Daoom Factory 1988 archive photo at Beat 4, with "3대째 / 김수경 박사" small-text overlay. Restrained, fast, on-screen <em>once</em>. Heritage = backstop, not centerpiece.</div></div>
+    </div>
+
+    <div class="quote">
+      "솔직히 말하면, 저도 매일 채소 350g 못 먹어요."
+      <span class="quote-attr">— Alex · v2 opening line · 2026.05.24</span>
+    </div>
+  </section>
+
+  <!-- THESIS -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">02 · The Thesis (revised)</div>
+      <h2 class="section-title">One sentence the brand stands behind</h2>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Core Message · v2</div>
+      <p>매일 채소 350g — 사실 저도 못 먹어요. 그래서 만들었어요. 마법은 없고요, 하루의 첫 결정 하나 챙기는 거예요.</p>
+      <p style="margin-top: 12px; font-size: 13.5px; color: var(--ink-muted); font-style: italic;">"350g of vegetables a day — honestly, I can't either. So I made this. No magic — just one first decision of the day, owned."</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">What the viewer walks away with</div>
+      <p><strong>1 ·</strong> The founder is honest. He admits he can't do the 350g either. That makes the brand human.</p>
+      <p><strong>2 ·</strong> Identity stamp: "I'm someone who changes one thing in the morning." The viewer joins a movement, not a transaction.</p>
+      <p><strong>3 ·</strong> There's a real product. 18 organic vegetables, family-made since 1988. Heritage is shown, not claimed.</p>
+      <p><strong>4 ·</strong> Series continues. Episode 2 already promised at the end.</p>
+    </div>
+  </section>
+
+  <!-- 5-BEAT SCRIPT -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">03 · The Script</div>
+      <h2 class="section-title">5 beats · 60 seconds</h2>
+      <p class="section-lede">Curiosity Hook → Problem → Turn (the answer) → Authority Flash → Quotable Payoff. Korean primary VO, English captions synced. 2세대 register throughout — observational, self-talk, no editorial-declarative.</p>
+    </div>
+
+    <div class="beat-grid">
+
+      <!-- BEAT 1 -->
+      <div class="beat">
+        <div class="beat-head">
+          <div class="beat-num">Beat 01 · Hook · Curiosity Confession</div>
+          <div class="beat-time">0:00 — 0:05</div>
+        </div>
+        <div class="beat-title">Founder confession. Specific, Naver-verified stat.</div>
+        <div>
+          <span class="beat-principle">Curiosity Trap 9/10</span>
+          <span class="beat-principle">Authority 4/10 (MFDS)</span>
+          <span class="beat-principle">Shareable</span>
+        </div>
+
+        <div class="beat-script">
+          <div class="beat-script-label">VO · Korean</div>
+          <div class="beat-script-kr">솔직히 말하면,<br>저도 매일 채소 350g 못 먹어요.</div>
+          <div class="beat-script-en">"Honestly — I can't eat 350g of vegetables every day either."</div>
+        </div>
+
+        <div class="beat-shot"><strong>Shot</strong> Alex at desk, side profile, glance through kitchen window. Morning light from right. NOT looking at camera. Documentary register.</div>
+        <div class="beat-shot"><strong>On-screen</strong> Top-right small: "한국 영양학회 권장량 · 350g" · Bottom strap: "Alex · AVO 창업자"</div>
+        <div class="beat-shot"><strong>Sound</strong> Ambient kitchen · kettle starting · no music yet</div>
+        <div class="beat-shot"><strong>Note</strong> The "솔직히 말하면" opener is the 2세대 register move. Self-talk. Confessional. Pulls viewer in.</div>
+      </div>
+
+      <!-- BEAT 2 -->
+      <div class="beat">
+        <div class="beat-head">
+          <div class="beat-num">Beat 02 · Problem · The Chaos</div>
+          <div class="beat-time">0:05 — 0:18</div>
+        </div>
+        <div class="beat-title">Name the modern wellness mess. Make it specific.</div>
+        <div>
+          <span class="beat-principle">Stories (problem beat)</span>
+          <span class="beat-principle">Shareable (relatable)</span>
+        </div>
+
+        <div class="beat-script">
+          <div class="beat-script-label">VO · Korean</div>
+          <div class="beat-script-kr">다들 80가지 영양제를 챙겨요.<br>비타민, 미네랄, 프로바이오틱스...<br>그래도 안 채워져요.</div>
+          <div class="beat-script-en">"Everyone's stacking 80 different supplements — vitamins, minerals, probiotics. Still doesn't add up."</div>
+        </div>
+
+        <div class="beat-shot"><strong>Shot A</strong> (0:05–0:11) Slow pan over a cluttered counter — supplement bottles, blister packs, scattered notes, a half-finished water bottle. <em>Real</em>, not glamour. No styled product placement.</div>
+        <div class="beat-shot"><strong>Shot B</strong> (0:11–0:15) Hand reaches into frame, pauses over the clutter. Pulls back.</div>
+        <div class="beat-shot"><strong>Shot C</strong> (0:15–0:18) Cut to Alex looking at the counter from a slight distance. Quiet. Not resigned, just observing.</div>
+        <div class="beat-shot"><strong>On-screen</strong> Lower-third self-talk: "...뭐가 정답인지 모르겠음." (2세대 register · matches Carousel #1 v5 sub-line)</div>
+      </div>
+
+      <!-- BEAT 3 -->
+      <div class="beat">
+        <div class="beat-head">
+          <div class="beat-num">Beat 03 · Turn (전) · The Answer + Identity Stamp</div>
+          <div class="beat-time">0:18 — 0:35</div>
+        </div>
+        <div class="beat-title">One specific decision. Identity Layer 3 on screen.</div>
+        <div>
+          <span class="beat-principle">Identity Layer 3 (PRIMARY)</span>
+          <span class="beat-principle">Stories (the turn)</span>
+          <span class="beat-principle">Shareable</span>
+        </div>
+
+        <div class="beat-script">
+          <div class="beat-script-label">VO · Korean</div>
+          <div class="beat-script-kr">그래서 저는 아침에<br>딱 하나만 정했어요.<br>커피 마시기 전에,<br>한 모금. 그게 다예요.</div>
+          <div class="beat-script-en">"So I made one rule for my mornings. Before coffee — one sip. That's it."</div>
+        </div>
+
+        <div class="beat-shot"><strong>Shot A</strong> (0:18–0:23) Alex pours room-temp water (canon: "Wednesday morning · 물 한 잔"). Real ritual.</div>
+        <div class="beat-shot"><strong>Shot B</strong> (0:23–0:28) Cut to AVO 190mL pouch tilting into glass. Slow, thick pour. Cream-green color emerges. NO label glamour shot.</div>
+        <div class="beat-shot"><strong>Shot C</strong> (0:28–0:32) First sip. No exaggerated reaction. Just a sip. Sets glass down.</div>
+        <div class="beat-shot"><strong>Shot D</strong> (0:32–0:35) Wide of Alex returning to desk with the glass. Daily life, not staged.</div>
+        <div class="beat-shot"><strong>On-screen</strong> Lower third, large: "이건 마법이 아니에요. <br>결정이에요." (Identity Layer 3 stamp · the line viewer sees themselves in)</div>
+        <div class="beat-shot"><strong>Caption strap</strong> (small, top): "매일 하나만 바꾸는 사람."</div>
+      </div>
+
+      <!-- BEAT 4 -->
+      <div class="beat">
+        <div class="beat-head">
+          <div class="beat-num">Beat 04 · Authority Flash · Daoom 1988</div>
+          <div class="beat-time">0:35 — 0:48</div>
+        </div>
+        <div class="beat-title">Heritage as backstop. Once. Restrained.</div>
+        <div>
+          <span class="beat-principle">Authority 8/10</span>
+          <span class="beat-principle">Stories (heritage thread)</span>
+        </div>
+
+        <div class="beat-script">
+          <div class="beat-script-label">VO · Korean</div>
+          <div class="beat-script-kr">이 안에 18가지 유기농<br>채소·과일이 들어가 있어요.<br>1988년부터 우리 가족이<br>만든 방식이에요.</div>
+          <div class="beat-script-en">"18 organic vegetables and fruits inside. Made the way our family's been doing it since 1988."</div>
+        </div>
+
+        <div class="beat-shot"><strong>Shot A</strong> (0:35–0:40) Restrained still-life grid of 18 freeze-dried ingredients on cream linen — overhead, 3 rows × 6 columns. 5 seconds.</div>
+        <div class="beat-shot"><strong>Shot B</strong> (0:40–0:41) <strong>1-SECOND FLASH</strong> · Daoom Factory 1988 archive photo (real asset · AVO:Daoom Factory 1.png) · sepia/desaturated · documentary register. Do not linger.</div>
+        <div class="beat-shot"><strong>Shot C</strong> (0:41–0:48) Cut back to Alex at desk with glass. Quiet beat. Holds.</div>
+        <div class="beat-shot"><strong>On-screen small</strong> "Daoom · 1988 · 3대째 · 김수경 박사 (식품학)" — bottom strap, tiny, kerned wide. Per heritage-voice-rule: surface once, never centerpiece.</div>
+      </div>
+
+      <!-- BEAT 5 -->
+      <div class="beat">
+        <div class="beat-head">
+          <div class="beat-num">Beat 05 · Payoff · The Quotable</div>
+          <div class="beat-time">0:48 — 0:60</div>
+        </div>
+        <div class="beat-title">Canon Tier-1 quotables stacked. Brand line lands.</div>
+        <div>
+          <span class="beat-principle">Shareability 8/10</span>
+          <span class="beat-principle">Identity</span>
+          <span class="beat-principle">Stories (resolves)</span>
+        </div>
+
+        <div class="beat-script">
+          <div class="beat-script-label">VO · Korean</div>
+          <div class="beat-script-kr">마법의 약은 없어요.<br>매일 하는 작은 결정이 전부예요.<br>하루의 첫 모금은,<br>그날의 첫 결정이에요.</div>
+          <div class="beat-script-en">"There's no magic pill. Just small daily decisions. Your first sip is your first decision of the day."</div>
+        </div>
+
+        <div class="beat-shot"><strong>Shot A</strong> (0:48–0:54) Alex sets glass down. Looks out window (NOT at camera). Holds. Steam from kettle drifts.</div>
+        <div class="beat-shot"><strong>Shot B</strong> (0:54–0:58) AVO wordmark fades up bottom-center. White on the existing scene.</div>
+        <div class="beat-shot"><strong>Shot C</strong> (0:58–1:00) Pull-quote card: "하루의 첫 모금." centered. Cream background. Hold 2 seconds. End.</div>
+        <div class="beat-shot"><strong>End card</strong> AVO logo · "하루의 첫 모금." · no CTA, no link, no price. Brand only.</div>
+        <div class="beat-shot"><strong>Canon sources</strong> "There is no magic pill" + "Don't underestimate your everyday decisions" + "하루의 첫 모금은, 그날의 첫 결정이에요" (all Tier-1 from canon)</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ANTICIPATION -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">04 · The Next Watch</div>
+      <h2 class="section-title">Tee up Episode 02</h2>
+      <p class="section-lede">Soft tease at the very end. Same brand voice. No promo energy.</p>
+    </div>
+
+    <div class="next-ep">
+      <div class="next-ep-label">Next episode</div>
+      <div class="next-ep-title">"왜 두유였을까요?"</div>
+      <div class="next-ep-sub">EP 02 · 1980년대 어느 부엌에서, 할머니가 처음 두유를 끓이기 시작한 이유. (Soymilk = canon: "Soymilk gave whoever drank it hope.")</div>
+    </div>
+  </section>
+
+  <!-- PRODUCTION -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">05 · Production</div>
+      <h2 class="section-title">How to shoot</h2>
+      <p class="section-lede">Single shoot day. Alex's home kitchen + desk. Two locations, one camera, no crew. Same setup as v1 — content changes, production stays simple.</p>
+    </div>
+
+    <table>
+      <tr><th>Element</th><th>Spec</th></tr>
+      <tr><td><strong>Camera</strong></td><td>iPhone 15 Pro+ · 4K 30fps · vertical 9:16 · ProRes if storage allows</td></tr>
+      <tr><td><strong>Audio</strong></td><td>Lavalier preferred (Rode Wireless GO II / DJI Mic). VO recorded separately for clean tracks.</td></tr>
+      <tr><td><strong>Lighting</strong></td><td>Natural morning light only. Shoot 7:30–9:30am. No artificial fill.</td></tr>
+      <tr><td><strong>Wardrobe</strong></td><td>Clean cream/oat tee or sweater · neutral pants · no logos · no jewelry · hair natural · NOT styled</td></tr>
+      <tr><td><strong>Setting</strong></td><td>Kitchen + adjacent desk · cream/wood/white tones · NO Pheeew/SO/Bobsnu items visible</td></tr>
+      <tr><td><strong>Props in frame</strong></td><td>1 × 190mL pouch · 1 × clear glass · 1 × ceramic mug · 1 × kettle · 18-ingredient grid (Beat 04) · cluttered supplement counter (Beat 02, real not styled)</td></tr>
+      <tr><td><strong>Music</strong></td><td>None or barely-there ambient. Pour, kettle, sip carry the audio. No trending sound.</td></tr>
+      <tr><td><strong>Editing</strong></td><td>CapCut or Premiere · cream-tone color grade · captions: Pretendard 600 weight · subtitle position: 8% from bottom · AVO Green (#1c7e3f) for accent</td></tr>
+      <tr><td><strong>Shoot time</strong></td><td>~3 hours · ~45 min edit · same-day post</td></tr>
+      <tr><td><strong>Cost</strong></td><td>$0 (iPhone + existing kit) · or $25 lavalier rental</td></tr>
+    </table>
+  </section>
+
+  <!-- DO / DON'T -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">06 · Voice Rules</div>
+      <h2 class="section-title">Do this · Don't do this</h2>
+    </div>
+
+    <div class="do-dont">
+      <div class="do">
+        <h4>Do</h4>
+        <ul>
+          <li>Open with confession, not declaration</li>
+          <li>2세대 register · self-talk · -요/-대요/-음 mix</li>
+          <li>Real motions, real timing · pour, sip, set down</li>
+          <li>Documentary register · side profile · NOT eye-contact-to-camera</li>
+          <li>Let silence and the kettle carry beats</li>
+          <li>End with brand line, not CTA</li>
+          <li>Heritage flash · 1 second · once</li>
+          <li>Identity stamp on screen at Beat 03</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h4>Don't</h4>
+        <ul>
+          <li>NO founder glamour shot to camera with product</li>
+          <li>NO grandfather/Daoom as centerpiece</li>
+          <li>NO "혁신적인" / "최고의" / "프리미엄"</li>
+          <li>NO price, NO discount, NO "link in bio"</li>
+          <li>NO trending TikTok sound or transition</li>
+          <li>NO mention of Pheeew, Bobsnu, SO</li>
+          <li>NO before/after weight or therapeutic claims</li>
+          <li>NO 400g WHO stat — use 350g 한국영양학회 (Korean MFDS)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPTIONS -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">07 · Captions</div>
+      <h2 class="section-title">Posting copy · platform variants</h2>
+      <p class="section-lede">All caption openers use a quotable from the Reel itself (Principle 5 · shareability anchored across formats).</p>
+    </div>
+
+    <div class="caption-block">
+      <div class="caption-block-label">Instagram · Reels caption (long anchor)</div>
+솔직히 말하면,
+저도 매일 채소 350g 못 먹어요.
+
+다들 80가지 영양제를 챙겨요.
+비타민, 미네랄, 프로바이오틱스...
+그래도 안 채워져요.
+
+그래서 저는 아침에 딱 하나만 정했어요.
+커피 마시기 전에, 한 모금.
+
+이 안에 18가지 유기농 채소·과일.
+1988년부터, 우리 가족이 만들어요.
+
+마법은 없어요.
+매일 하는 작은 결정이 전부예요.
+
+— AVO Wild Greens Salad Soymilk · 190mL
+하루의 첫 모금.
+    </div>
+
+    <div class="caption-block">
+      <div class="caption-block-label">TikTok · short, hook-led</div>
+"솔직히, 저도 매일 350g 못 먹어요."
+
+그래서 아침에 딱 하나만 정했어요.
+커피 전에 한 모금.
+
+마법은 없어요.
+결정이에요.
+
+— 와일드 그린즈 샐러두유
+    </div>
+
+    <div class="caption-block">
+      <div class="caption-block-label">YouTube Shorts · description</div>
+EP 01 — 저도 못 먹어요.
+
+한국 영양학회 권장량은 하루 350g.
+저(AVO 창업자 알렉스)도 매일 못 먹습니다.
+그래서 아침에 한 모금만 챙기기로 했어요.
+
+와일드 그린즈 샐러두유 · 190mL.
+1988년부터 우리 가족이 만든 방식.
+
+다음 편 EP 02 · "왜 두유였을까요?"
+    </div>
+
+    <div class="caption-block">
+      <div class="caption-block-label">Threads · single-post</div>
+한국 영양학회 권장량은 하루 350g.
+저도 매일 못 먹어요.
+
+그래서 아침에 한 모금만 정했어요.
+커피 전에. 그게 다예요.
+    </div>
+
+    <div class="caption-block">
+      <div class="caption-block-label">Naver Blog · SEO companion title</div>
+하루 채소 350g, 정말 매일 먹어야 할까? — 와일드 그린즈 샐러두유 한 모금이면 가능한 이유
+
+(Keywords: 채소 권장량, 한국 영양학회 350g, 샐러두유, 식이섬유, 18종 유기농 과채, 아침 루틴)
+    </div>
+  </section>
+
+  <!-- HASHTAGS -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">08 · Hashtags</div>
+      <h2 class="section-title">Tag strategy · same as v1</h2>
+      <p class="section-lede">Brand-led, low-volume. We are not chasing trending tags in Ep 01.</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Always · every post</div>
+      <div class="hashtag-row">
+        <span class="chip">#AVO</span><span class="chip">#와일드그린즈</span><span class="chip">#샐러두유</span><span class="chip">#하루의첫모금</span><span class="chip">#마법은없어요</span>
+      </div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Category · rotate 4–6</div>
+      <div class="hashtag-row">
+        <span class="chip">#유기농</span><span class="chip">#식이섬유</span><span class="chip">#두유</span><span class="chip">#클린이팅</span><span class="chip">#건강식</span><span class="chip">#아침루틴</span><span class="chip">#장건강</span><span class="chip">#균형영양식</span><span class="chip">#채소권장량</span><span class="chip">#350g</span>
+      </div>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">English audience</div>
+      <div class="hashtag-row">
+        <span class="chip">#wildgreens</span><span class="chip">#saladsoymilk</span><span class="chip">#cleaneating</span><span class="chip">#wholefoodnutrition</span><span class="chip">#nomagicpill</span><span class="chip">#smalldailydecisions</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISTRIBUTION -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">09 · Distribution</div>
+      <h2 class="section-title">Where it lands · 6 platforms</h2>
+    </div>
+
+    <table>
+      <tr><th>Platform</th><th>Priority</th><th>Role</th></tr>
+      <tr><td><strong>Instagram Reels</strong></td><td>P1</td><td>Main anchor · pinned to top of @allvitalorganics · drives saves + shares + profile-tap</td></tr>
+      <tr><td><strong>TikTok</strong></td><td>P1</td><td>Same cut, tighter (55s). Caption variant. Separate upload, NOT auto-cross-post.</td></tr>
+      <tr><td><strong>YouTube Shorts</strong></td><td>P2</td><td>Same cut. Long-form ledger anchor. Description doubles as series index.</td></tr>
+      <tr><td><strong>Naver Blog</strong></td><td>P2</td><td>Written companion · stills + script + product link. SEO anchor for "채소 권장량 350g."</td></tr>
+      <tr><td><strong>Threads</strong></td><td>P3</td><td>Hook-only version. Cross-post 24h after main Reel for sequence pickup.</td></tr>
+      <tr><td><strong>Instagram Carousel</strong></td><td>P1</td><td><strong>Carousel #1 v5 (already built)</strong> — same beats as static carousel companion. Edit URL: canva.com/d/nQAxuiQdxXW4cTC</td></tr>
+    </table>
+  </section>
+
+  <!-- KPI -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">10 · Measurement</div>
+      <h2 class="section-title">What we measure · Ep 01 only</h2>
+      <p class="section-lede">Pre-launch metrics that matter. Vanity views ignored.</p>
+    </div>
+
+    <table>
+      <tr><th>Metric</th><th>Target (Week 1)</th><th>Why</th></tr>
+      <tr><td><strong>Saves</strong></td><td>5%+ of reach</td><td>The one IG metric that signals genuine interest pre-launch</td></tr>
+      <tr><td><strong>Shares</strong></td><td>3%+ of reach</td><td>Shareability principle = direct test</td></tr>
+      <tr><td><strong>Profile-tap rate</strong></td><td>8%+ of reach</td><td>Brand introduction working = people want to know more</td></tr>
+      <tr><td><strong>Comments quality</strong></td><td>≥30% mention "founder" or "솔직히"</td><td>Confession hook landed if so</td></tr>
+      <tr><td><strong>Watch-through</strong></td><td>>50%</td><td>60s Reel is long for the format · means the curiosity gap held</td></tr>
+      <tr><td><strong>Bio link clicks</strong></td><td>Ignore</td><td>No CTA in Ep 01 by design</td></tr>
+    </table>
+  </section>
+
+  <!-- WHAT CHANGED CHECKLIST -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">11 · The v1 → v2 Audit</div>
+      <h2 class="section-title">Every change, traceable</h2>
+      <p class="section-lede">Honest record of what was wrong with v1 and what v2 does instead. Future episodes (02–07) inherit these principles.</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Hook</div>
+      <p><strong>v1:</strong> "다들 마법의 알약을 찾아요. 그런 건 없어요." (declarative · answers before opening curiosity)</p>
+      <p><strong>v2:</strong> "솔직히 말하면, 저도 매일 채소 350g 못 먹어요." (confession · opens gap · Naver-verified stat)</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Stat</div>
+      <p><strong>v1:</strong> No stat in Ep 01 · weakens credibility</p>
+      <p><strong>v2:</strong> 350g 한국영양학회 (verified via Naver Developers API search 2026.05.24 · cited in "건강라디오" blog · MFDS-aligned · culturally accurate vs. WHO 400g)</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Protagonist</div>
+      <p><strong>v1:</strong> Abstract narrator · category positioning · brand-as-thinker</p>
+      <p><strong>v2:</strong> Alex throughline · his confession · his morning · his ritual · 60-second documentary of one person's one decision</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Identity</div>
+      <p><strong>v1:</strong> Specs dumped at Beat 03 (18종 / 5,000mg / 단백질 5g / 4종 무첨가) · pure Layer 1</p>
+      <p><strong>v2:</strong> "매일 하나만 바꾸는 사람" identity stamp on Beat 03 screen · specs demoted to small text at Beat 04</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Authority</div>
+      <p><strong>v1:</strong> Daoom tease saved for Ep 02 · Ep 01 itself has zero credential anchor</p>
+      <p><strong>v2:</strong> 1-second flash of Daoom Factory 1988 archive at Beat 04 · "3대째 · 김수경 박사" small text overlay · heritage as backstop, not centerpiece</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Quotables on screen</div>
+      <p><strong>v1:</strong> One quotable at Beat 04 ("하루의 첫 모금")</p>
+      <p><strong>v2:</strong> Three quotable anchors · Beat 01 confession · Beat 03 "마법이 아니에요. 결정이에요." · Beat 05 "그날의 첫 결정이에요."</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-card-title">Tone register</div>
+      <p><strong>v1:</strong> Mix of declarative editorial + occasional self-talk · drifts to category-essay register</p>
+      <p><strong>v2:</strong> Consistent 2세대 register · -요/-대요/-음 ending mix · self-talk ("솔직히 말하면", "...뭐가 정답인지 모르겠음") · matches Carousel #1 v5 voice exactly</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    AVO · Episode 01 v2 · 2026.05.24 · Refined per the 6 Psychology Principles (3 Billion Views framework) + Founder-Led Brand Masterclass + 2세대 hooking framework.<br>
+    Companion deliverables · Carousel #1 v5 (Canva: canva.com/d/nQAxuiQdxXW4cTC) · canon source: reference_alex_founder_story_canon_2026_05_23.md · register: reference_avo_2sedae_hooking_framework_2026_05_24.md · stat: reference_naver_api_integration_2026_05_24.md
+  </div>
+
+</div>
+
+</body>
+</html>
