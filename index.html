@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVO Carousel #1 · v5 · 음료가 아니에요, 첫 모금이에요 · 2026.05.24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --avo-green: #1c7e3f;
+  --avo-green-2: #233b1c;
+  --avo-white: #F7FEF9;
+  --avo-black: #010301;
+  --sub-ink: rgba(1, 3, 1, 0.62);
+  --cream: #F2EBDB;
+  --cream-deep: #E8DFCB;
+  --linen: #F7F2E6;
+  --serif-bold: "LT Museum Bold", "Cormorant Garamond", "Bodoni Moda", Georgia, serif;
+  --sans: "Neue Haas Grotesk Display", "Inter", "Helvetica Neue", "Noto Sans KR", sans-serif;
+
+  --slide-w: 1080px;
+  --slide-h: 1350px;
+  --margin-side: 80px;
+  --logo-w: 180px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: #D8D3C5;
+  color: var(--avo-black);
+  -webkit-font-smoothing: antialiased;
+  padding: 48px 24px;
+}
+
+/* PRINT HEADER */
+.print-header {
+  max-width: 1080px;
+  margin: 0 auto 40px;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  border: 1px solid #ccc;
+}
+.print-header .badge {
+  display: inline-block;
+  background: var(--avo-green);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.print-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--avo-green);
+  margin-bottom: 10px;
+}
+.print-header p {
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.print-header strong { color: #1a1a1a; }
+.print-header table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 12.5px;
+}
+.print-header th, .print-header td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+}
+.print-header th {
+  background: #F5F9E8;
+  color: var(--avo-green);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+@media print { .print-header, .variant-label { display: none; } }
+
+/* SLIDE WRAPPER + VARIANT LABEL */
+.slide-wrapper { max-width: 1080px; margin: 0 auto 32px; }
+.variant-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--avo-green);
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+
+/* BASE SLIDE */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+/* IMAGE BACKGROUND · full-bleed */
+.bg-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.bg-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Subtle bottom gradient for logo legibility */
+.bg-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(to bottom, rgba(247, 247, 240, 0) 0%, rgba(247, 247, 240, 0.65) 100%);
+  z-index: 2;
+}
+
+/* TOP / EYEBROW · for source / credit */
+.eyebrow {
+  position: absolute;
+  top: 80px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--avo-green);
+}
+
+/* TITLE ZONE · upper-left, in negative space */
+.title-zone {
+  position: absolute;
+  top: 140px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+}
+.title-zone.center {
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+.title-zone.lower {
+  top: auto;
+  bottom: 280px;
+}
+.title-serif {
+  font-family: var(--serif-bold);
+  font-size: 84px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  color: var(--avo-black);
+  word-break: keep-all;
+}
+.title-serif.smaller { font-size: 72px; }
+.title-serif.smallest { font-size: 60px; }
+.title-serif.white { color: var(--avo-white); }
+.dots-accent { color: var(--avo-green); }
+.green-accent { color: var(--avo-green); }
+
+/* SUB LINE · 2세대 self-talk continuation */
+.sub-line {
+  margin-top: 32px;
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.4px;
+  color: var(--sub-ink);
+  word-break: keep-all;
+}
+.sub-line.large { font-size: 26px; }
+.sub-line.white { color: rgba(247, 254, 249, 0.85); }
+
+/* FOOTER · small spec / footnote */
+.footer-note {
+  position: absolute;
+  bottom: 180px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sub-ink);
+  letter-spacing: 0.3px;
+}
+
+/* WORDMARK · 180px wide · BOTTOM-CENTER */
+.wordmark {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--logo-w);
+  z-index: 4;
+}
+.wordmark img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* SOLID BG slides (no image) */
+.slide.solid-cream { background: var(--cream); }
+.slide.solid-linen { background: var(--linen); }
+.slide.solid-green { background: var(--avo-green); }
+
+/* Quote card slide */
+.quote-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 var(--margin-side);
+  z-index: 3;
+}
+.quote-mark {
+  font-family: var(--serif-bold);
+  font-size: 200px;
+  line-height: 0.7;
+  color: var(--avo-green);
+  margin-bottom: 20px;
+}
+.quote-body {
+  font-family: var(--serif-bold);
+  font-size: 76px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--avo-black);
+  word-break: keep-all;
+  font-style: italic;
+}
+.quote-attr {
+  margin-top: 36px;
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--sub-ink);
+  letter-spacing: 0.3px;
+}
+
+/* Identity-flip "from → to" slide */
+.flip-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--margin-side);
+  z-index: 3;
+}
+.flip-line {
+  font-family: var(--serif-bold);
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  color: var(--avo-black);
+  word-break: keep-all;
+  margin-bottom: 16px;
+}
+.flip-arrow {
+  font-family: var(--serif-bold);
+  font-size: 80px;
+  color: var(--avo-green);
+  margin: 16px 0;
+  font-weight: 300;
+  line-height: 1;
+}
+.flip-line.target {
+  color: var(--avo-green);
+  font-weight: 700;
+}
+
+/* Centered hero CTA slide */
+.cta-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 60px;
+  z-index: 3;
+}
+.cta-title {
+  font-family: var(--serif-bold);
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: var(--avo-white);
+  word-break: keep-all;
+  margin-bottom: 40px;
+}
+.cta-action {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(247, 254, 249, 0.85);
+  letter-spacing: 0.3px;
+  word-break: keep-all;
+}
+
+</style>
+</head>
+<body>
+
+<div class="print-header">
+  <span class="badge">v5 · SINGLE HTML · 10 SLIDES · 2026.05.24</span>
+  <h1>음료가 아니에요, 첫 모금이에요.</h1>
+  <p><strong>Carousel #1 v5</strong> · 6 Psychology Principles applied · target 50+/60 (v4 = 27/60) · Alex-as-protagonist track · Korean MFDS stat (350g, not WHO 400g).</p>
+  <table>
+    <tr><th>Slide</th><th>Beat</th><th>Principles hit</th><th>Image source</th></tr>
+    <tr><td>1</td><td>HOOK</td><td>Curiosity (9/10)</td><td>avo_slide01_bg_v1.png</td></tr>
+    <tr><td>2</td><td>ANSWER + quotable</td><td>Shareability · Authority</td><td>avo_slide02_portion_v1.png</td></tr>
+    <tr><td>3</td><td>PROTAGONIST entry</td><td>Stories · Curiosity</td><td>avo_slide03_alex_candid_v1.png (NEW)</td></tr>
+    <tr><td>4</td><td>STORY beat · ritual</td><td>Stories · Identity</td><td>avo_slide04_ritual_v1.png (NEW)</td></tr>
+    <tr><td>5</td><td>IDENTITY flip · 18종</td><td>Identity (Layer 3)</td><td>avo_slide05_split_v1.png (NEW)</td></tr>
+    <tr><td>6</td><td>IDENTITY · 장 깨끗</td><td>Identity (Layer 3)</td><td>avo_slide06_fiber_v1.png</td></tr>
+    <tr><td>7</td><td>AUTHORITY · Daoom</td><td>Authority · Stories</td><td>AVO:Daoom Factory 1.png (REAL)</td></tr>
+    <tr><td>8</td><td>PROOF · canon quote</td><td>Shareability · Stories</td><td>CSS quote card</td></tr>
+    <tr><td>9</td><td>PAYOFF · Alex principle</td><td>Stories · Identity</td><td>avo_slide09_alex_writing_v1.png (NEW)</td></tr>
+    <tr><td>10</td><td>QUOTABLE CTA</td><td>Shareability</td><td>avo_pouch_hero_001.png</td></tr>
+  </table>
+  <p><strong>Editable handoff:</strong> This HTML can be imported to Canva via <code>import-design-from-url</code> for slide-by-slide editing once Canva MCP is authed.</p>
+</div>
+
+<!-- ===== SLIDE 01 · HOOK ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 01 · HOOK · curiosity trap (kept from v4)</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide01_bg_v1.png" alt="Editorial kale + cherry tomatoes + cucumber bowl">
+    </div>
+    <div class="title-zone">
+      <h1 class="title-serif">근데 진짜<br>하루에 채소<br>얼마나<br>먹어야 하나요<span class="dots-accent">...?</span></h1>
+      <p class="sub-line">...뭐가 정답인지<br>모르겠음.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 02 · ANSWER + first quotable ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 02 · ANSWER · 350g 한국영양학회 · first quotable anchor</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide02_portion_v1.png" alt="Two bowls of greens, top-down">
+    </div>
+    <div class="eyebrow">한국영양학회 · MFDS 권장</div>
+    <div class="title-zone">
+      <h1 class="title-serif smaller">한국 영양학회 기준<br><span class="green-accent">하루 350g.</span></h1>
+      <p class="sub-line large">한 그릇 분이 아니에요.<br>두 그릇이에요.</p>
+    </div>
+    <div class="footer-note">350g · 익히기 전 raw weight 기준</div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 03 · PROTAGONIST entry · Alex confession ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 03 · PROTAGONIST · Alex confession · sculptor→food canon</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide03_alex_candid_v1.png" alt="Alex working at desk, candid documentary">
+    </div>
+    <div class="eyebrow">Alex · AVO 창업자</div>
+    <div class="title-zone">
+      <h1 class="title-serif smaller">저도<br>못 먹어요.</h1>
+      <p class="sub-line large">조각가가 되려던 사람이,<br>지금은 채소를 챙기고 있어요.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 04 · STORY · morning ritual ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 04 · STORY · Alex morning ritual canon · "ritual that never broke"</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide04_ritual_v1.png" alt="Editorial still life: water, kale leaf, pouch">
+    </div>
+    <div class="eyebrow">Alex's morning · 5:48 AM</div>
+    <div class="title-zone">
+      <h1 class="title-serif smaller">아침에<br>일어나서,<br>물 한 잔<br>찬물 샤워<br><span class="green-accent">그리고 한 모금.</span></h1>
+      <p class="sub-line">커피보다 먼저예요.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 05 · IDENTITY flip · 18종 ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 05 · IDENTITY · "18가지 챙기던 사람 → 한 모금으로 끝낸 사람"</span>
+  <div class="slide solid-linen">
+    <div class="eyebrow">Wild Greens · 18종 유기농 과채</div>
+    <div class="flip-zone">
+      <div class="flip-line">18가지를<br>따로 챙기던 사람</div>
+      <div class="flip-arrow">↓</div>
+      <div class="flip-line target">한 모금으로<br>끝내는 사람.</div>
+      <p class="sub-line" style="margin-top: 40px;">결국 같은 18가지예요.<br>시간만 바뀌었어요.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 06 · IDENTITY · 장 깨끗 ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 06 · IDENTITY · "장이 매일 깨끗한 사람" · spec demoted</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide06_fiber_v1.png" alt="Hand reaching for AVO pouch in soft morning light">
+    </div>
+    <div class="eyebrow">식이섬유 · gut clean</div>
+    <div class="title-zone">
+      <h1 class="title-serif">장이 매일<br><span class="green-accent">깨끗한 사람.</span></h1>
+      <p class="sub-line">(식이섬유 5,000mg<br>· 한 그릇 분.)</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 07 · AUTHORITY · Daoom 1988 ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 07 · AUTHORITY · Daoom 1988 · real archive photo · heritage backstop</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="brand_assets/AVO_Daoom_Factory_1.png" alt="Daoom Factory 1988 archive photo">
+    </div>
+    <div class="eyebrow" style="color: var(--avo-white);">Daoom · 1988</div>
+    <div class="title-zone">
+      <h1 class="title-serif smaller white">1988년부터,<br>한 가족이<br>같은 음식만<br>만들어왔어요.</h1>
+      <p class="sub-line large white">3대째예요.</p>
+    </div>
+    <div class="footer-note" style="color: rgba(247, 254, 249, 0.65);">김수경 박사 · 식품학 · 동결건조 38년</div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 08 · PROOF · canon customer quote ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 08 · PROOF · canon customer quote · "이거 마시고 화장실 잘 갔어요"</span>
+  <div class="slide solid-cream">
+    <div class="eyebrow">Customer · 익명 (실제 후기)</div>
+    <div class="quote-zone">
+      <div class="quote-mark">"</div>
+      <p class="quote-body">이거 마시고<br>화장실<br>잘 갔어요.</p>
+      <p class="quote-attr">— 진짜 받은 후기예요.</p>
+    </div>
+    <div class="footer-note">(다른 후기는 더 모이는 중이에요.)</div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 09 · PAYOFF · Alex principle ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 09 · PAYOFF · canon Tier-1 · "마법의 약은 없어요"</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_slide09_alex_writing_v1.png" alt="Alex writing in notebook, candid close-up">
+    </div>
+    <div class="eyebrow">Alex · 매일의 결정</div>
+    <div class="title-zone">
+      <h1 class="title-serif smaller">마법의 약은<br>없어요.<br><span style="font-style: italic; color: var(--sub-ink); font-size: 50px;">(라고 제가<br>말하고 있어요.)</span></h1>
+      <p class="sub-line large">매일 하는 작은 결정 —<br>그게 전부예요.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 10 · QUOTABLE CTA ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 10 · CTA · final quotable · "그날의 첫 결정"</span>
+  <div class="slide solid-green">
+    <div class="bg-image" style="opacity: 0.35;">
+      <img src="carousel_assets/avo_pouch_hero_001.png" alt="AVO Wild Greens Salad Soymilk pouch">
+    </div>
+    <div class="cta-zone">
+      <h1 class="cta-title">하루의 첫 모금은,<br>그날의<br>첫 결정이에요.</h1>
+      <p class="cta-action">AVO · 와일드 그린즈<br>프로필 링크에서 만나기.</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo" style="filter: brightness(0) invert(1);">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
