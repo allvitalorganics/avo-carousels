@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVO · Edu Carousel 01 · FIBER · 2026.05.24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --avo-green: #1c7e3f;
+  --avo-green-2: #233b1c;
+  --avo-white: #F7FEF9;
+  --avo-black: #010301;
+  --sub-ink: rgba(1, 3, 1, 0.62);
+  --cream: #F2EBDB;
+  --cream-deep: #E8DFCB;
+  --linen: #F7F2E6;
+  --serif-bold: "LT Museum Bold", "Cormorant Garamond", "Bodoni Moda", Georgia, serif;
+  --sans: "Neue Haas Grotesk Display", "Inter", "Helvetica Neue", "Noto Sans KR", sans-serif;
+  --slide-w: 1080px;
+  --slide-h: 1350px;
+  --margin-side: 80px;
+  --logo-w: 180px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: #D8D3C5;
+  color: var(--avo-black);
+  -webkit-font-smoothing: antialiased;
+  padding: 48px 24px;
+}
+
+/* PRINT HEADER */
+.print-header {
+  max-width: 1080px;
+  margin: 0 auto 40px;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  border: 1px solid #ccc;
+}
+.print-header .badge {
+  display: inline-block;
+  background: var(--avo-green);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.print-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--avo-green);
+  margin-bottom: 10px;
+}
+.print-header p {
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.print-header strong { color: #1a1a1a; }
+.print-header table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 12.5px;
+}
+.print-header th, .print-header td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+}
+.print-header th {
+  background: #F5F9E8;
+  color: var(--avo-green);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.source-block {
+  background: #FAFAF6;
+  border-left: 3px solid var(--avo-green);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.6;
+}
+.source-block strong { color: var(--avo-green); display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+/* PRINT CSS · each slide = one PDF page */
+@media print {
+  .print-header, .variant-label { display: none !important; }
+  body { padding: 0 !important; background: white !important; margin: 0 !important; }
+  .slide-wrapper { margin: 0 !important; padding: 0 !important; max-width: none !important; page-break-after: always; break-after: page; }
+  .slide-wrapper:last-child { page-break-after: avoid; break-after: avoid; }
+  .slide { box-shadow: none !important; }
+}
+@page { size: 1080px 1350px; margin: 0; }
+
+/* SLIDE WRAPPER + VARIANT LABEL */
+.slide-wrapper { max-width: 1080px; margin: 0 auto 32px; }
+.variant-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--avo-green);
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+
+/* BASE SLIDE */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+/* IMAGE BACKGROUND */
+.bg-image { position: absolute; inset: 0; z-index: 1; }
+.bg-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bg-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background: linear-gradient(to bottom, rgba(247, 247, 240, 0) 0%, rgba(247, 247, 240, 0.75) 100%);
+  z-index: 2;
+}
+
+/* EYEBROW */
+.eyebrow {
+  position: absolute;
+  top: 80px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--avo-green);
+}
+
+/* TITLE ZONE */
+.title-zone {
+  position: absolute;
+  top: 140px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+}
+.title-zone.center {
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+.title-zone.lower {
+  top: auto;
+  bottom: 260px;
+}
+.title-serif {
+  font-family: var(--serif-bold);
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -2.2px;
+  color: var(--avo-black);
+  word-break: keep-all;
+}
+.title-serif.smaller { font-size: 68px; }
+.title-serif.smallest { font-size: 56px; }
+.title-serif.huge { font-size: 100px; }
+.title-serif.white { color: var(--avo-white); }
+.dots-accent { color: var(--avo-green); }
+.green-accent { color: var(--avo-green); }
+.muted-accent { color: var(--sub-ink); font-weight: 500; }
+
+/* SUB LINE */
+.sub-line {
+  margin-top: 32px;
+  font-family: var(--sans);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+  color: var(--sub-ink);
+  word-break: keep-all;
+}
+.sub-line.large { font-size: 28px; }
+.sub-line.white { color: rgba(247, 254, 249, 0.85); }
+
+/* FOOTER */
+.footer-note {
+  position: absolute;
+  bottom: 180px;
+  left: var(--margin-side);
+  right: var(--margin-side);
+  z-index: 3;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sub-ink);
+  letter-spacing: 0.3px;
+}
+
+/* WORDMARK */
+.wordmark {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--logo-w);
+  z-index: 4;
+}
+.wordmark img { width: 100%; height: auto; display: block; }
+
+/* SOLID BG */
+.slide.solid-cream { background: var(--cream); }
+.slide.solid-linen { background: var(--linen); }
+.slide.solid-green { background: var(--avo-green); }
+
+/* BENEFITS list slide */
+.benefits-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--margin-side);
+  z-index: 3;
+}
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(1, 3, 1, 0.12);
+}
+.benefit-item:last-child { border-bottom: none; }
+.benefit-num {
+  font-family: var(--serif-bold);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--avo-green);
+  letter-spacing: -1px;
+  flex-shrink: 0;
+  width: 70px;
+}
+.benefit-body {
+  font-family: var(--serif-bold);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  color: var(--avo-black);
+  word-break: keep-all;
+}
+.benefit-sub {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--sub-ink);
+  letter-spacing: -0.2px;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+/* CTA */
+.cta-zone {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 60px;
+  z-index: 3;
+}
+.cta-title {
+  font-family: var(--serif-bold);
+  font-size: 78px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: var(--avo-white);
+  word-break: keep-all;
+  margin-bottom: 30px;
+}
+.cta-action {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(247, 254, 249, 0.88);
+  letter-spacing: 0.3px;
+  word-break: keep-all;
+  line-height: 1.5;
+}
+
+</style>
+</head>
+<body>
+
+<div class="print-header">
+  <span class="badge">EDUCATIONAL · CAROUSEL 01 · FIBER · 2026.05.24</span>
+  <h1>야채 1kg 먹어도 식이섬유 25g이 안 채워져요.</h1>
+  <p>5-slide educational carousel · digestible format · same Canva pipeline. <strong>Topic 1 of 4</strong> in the educational series (Fiber → Organic → What's NOT inside → Soy milk).</p>
+  <table>
+    <tr><th>Slide</th><th>Beat</th><th>Stat / Source</th></tr>
+    <tr><td>1</td><td>HOOK · misconception</td><td>"야채 1kg ≠ 25g 식이섬유" · 한국영양학회 RDA</td></tr>
+    <tr><td>2</td><td>STAT · RDA</td><td>성인 남성 25g · 여성 20g (2025 한국 영양소 섭취기준 · 보건복지부)</td></tr>
+    <tr><td>3</td><td>VISUALIZE · the gap</td><td>"사과 6개" = ~25g fiber (USDA: medium apple ≈ 4.4g)</td></tr>
+    <tr><td>4</td><td>WHY · 3 benefits</td><td>장 · 포만감 · 가공식품 자리 swap</td></tr>
+    <tr><td>5</td><td>AVO ANSWER · closer</td><td>"한 모금에 5,000mg · 권장량 20%"</td></tr>
+  </table>
+  <div class="source-block">
+    <strong>Verified sources (Naver Developers API research · 2026.05.24)</strong>
+    · 2025 한국인 영양소 섭취기준 개정안 (보건복지부 + 한국영양학회) · 성인 남 25g / 여 20g<br>
+    · 질병관리청 국민건강영양조사 · "한국인 평균 식이섬유 섭취량이 권장 기준에 미달"<br>
+    · 채소 섭취량 추이 · "최근 10년간 한국인 채소 섭취량 100g 이상 감소"<br>
+    · USDA FoodData Central · medium apple (~182g) ≈ 4.4g dietary fiber<br>
+    · AVO 와일드 그린즈 샐러두유 영양정보 · 190mL · 식이섬유 5,000mg (locked V1 spec)
+  </div>
+</div>
+
+<!-- ===== SLIDE 01 · HOOK · Misconception ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 01 · HOOK · misconception reveal · curiosity gap</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_fiber_hero_v1.png" alt="Editorial fiber-rich whole foods on cream linen">
+    </div>
+    <div class="eyebrow">식이섬유 · 우리가 몰랐던 거</div>
+    <div class="title-zone">
+      <h1 class="title-serif">야채 1kg을<br>먹어도<span class="dots-accent">,</span><br>식이섬유 25g이<br><span class="green-accent">안 채워져요.</span></h1>
+      <p class="sub-line">(이거 알고 / 계셨어요...?)</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 02 · STAT · 25g RDA ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 02 · STAT · 2025 영양소 섭취기준 · authority signal</span>
+  <div class="slide solid-cream">
+    <div class="eyebrow">보건복지부 · 한국영양학회 · 2025</div>
+    <div class="title-zone center">
+      <h1 class="title-serif huge"><span class="green-accent">25g.</span></h1>
+      <p class="sub-line large" style="margin-top: 40px;">성인 남성 하루 권장량.<br><span class="muted-accent">(여성은 20g.)</span></p>
+      <p class="sub-line" style="margin-top: 24px; font-size: 17px;">— 2025 한국인 영양소 섭취기준 개정안</p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 03 · THE GAP · visualized ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 03 · VISUALIZE · "사과 6개" reveal</span>
+  <div class="slide">
+    <div class="bg-image">
+      <img src="carousel_assets/avo_fiber_apples_v1.png" alt="Six apples on cream linen">
+    </div>
+    <div class="eyebrow">25g 채우려면</div>
+    <div class="title-zone">
+      <h1 class="title-serif"><span class="green-accent">사과 6개</span>를<br>매일 먹어야<br>채워져요.</h1>
+      <p class="sub-line large">(혹은 시금치 / 1kg 분량.)</p>
+    </div>
+    <div class="footer-note">USDA · medium apple ≈ 4.4g 식이섬유 · 25g ÷ 4.4 ≈ 5.7개</div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 04 · WHY · 3 benefits ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 04 · WHY · 3 benefits · identity layer 3</span>
+  <div class="slide solid-linen">
+    <div class="eyebrow">왜 챙기냐면 —</div>
+    <div class="benefits-zone">
+      <div class="benefit-item">
+        <div class="benefit-num">01</div>
+        <div>
+          <div class="benefit-body">장이 매일<br>깨끗해져요.</div>
+          <div class="benefit-sub">불용성 식이섬유 · 배변 활동에 도움.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-num">02</div>
+        <div>
+          <div class="benefit-body">포만감이 / 오래 가요.</div>
+          <div class="benefit-sub">혈당이 천천히 올라가요 · 수용성 식이섬유 작용.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-num">03</div>
+        <div>
+          <div class="benefit-body">가공식품 자리에<br>채소 자리.</div>
+          <div class="benefit-sub">하나 빼고 하나 더 — 매일 챙기는 사람의 시작.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo">
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 05 · AVO ANSWER ===== -->
+<div class="slide-wrapper">
+  <span class="variant-label">Slide 05 · AVO ANSWER · 5,000mg in one sip</span>
+  <div class="slide solid-green">
+    <div class="bg-image" style="opacity: 0.30;">
+      <img src="carousel_assets/avo_pouch_hero_001.png" alt="AVO Wild Greens Salad Soymilk pouch">
+    </div>
+    <div class="cta-zone">
+      <h1 class="cta-title">한 모금에<br><span style="color: var(--avo-white); font-style: italic;">5,000mg.</span></h1>
+      <p class="cta-action">18가지 유기농 채소·과일에서.<br>권장량의 약 20%.<br><br><strong style="font-weight: 700; color: white;">매일 챙기는 사람의 시작.</strong></p>
+    </div>
+    <div class="wordmark">
+      <img src="brand_assets/AVO_Logo_Concise.png" alt="AVO 1988 logo" style="filter: brightness(0) invert(1);">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
